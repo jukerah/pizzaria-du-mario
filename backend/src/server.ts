@@ -4,7 +4,7 @@ import cors from 'cors';
 
 import { router } from './routes/routes';
 
-const port = 3333;
+const port = process.env.PORT || 3333;
 
 const app = express();
 app.use(express.json());
@@ -22,5 +22,5 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 
 app.listen(port, () => {
-  console.log(`Servidor online na porta ${port}.`);
+  console.log(`Server running on port ${port}.`);
 });

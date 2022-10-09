@@ -1,11 +1,15 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
+
+import { CreateUserController } from '../controllers/user/CreateUserController';
+import { AuthUserController } from '../services/user/AuthUserController';
+import { DetailUserController } from '../controllers/user/DetailUserController';
+
+import { isAuthenticated } from '../middlewares/isAuthenticated';
 
 const router = Router();
 
-router.get('/teste', (req: Request, res: Response) => {
-  //throw new Error('Erro ao fazer essa requisição');
-
-  return res.json({ nome: "Pizzaria du'Mario" });
-});
+router.post('/users', new CreateUserController().handle);
+router.post('/session', new AuthUserController().handle);
+router.get('/me', isAuthenticated, new DetailUserController().handle);
 
 export { router };
