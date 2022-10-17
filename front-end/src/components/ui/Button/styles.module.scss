@@ -1,0 +1,43 @@
+.button {
+  background-color: var(--green-900);
+
+  width: 100%;
+  height: 48px;
+
+  border-radius: 4px;
+
+  &[disabled] {
+    cursor: not-allowed;
+    svg {
+      animation: rotation 2s infinite;
+    }
+  }
+
+  &:hover {
+    filter: brightness(1.08);
+  }
+
+  @media (min-width: 1024px) {
+    height: 56px;
+  }
+}
+
+.buttonText {
+  color: var(--black);
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  @media (min-width: 1024px) {
+    font-size: 1.6rem;
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

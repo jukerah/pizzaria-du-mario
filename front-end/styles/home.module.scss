@@ -1,0 +1,59 @@
+.container {
+  h1 {
+    font-size: 100px;
+    color: red;
+  }
+}
+
+.contrainerCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  width: 100vw;
+  height: 100vh;
+
+  padding: 24px;
+  gap: 24px;
+
+  @media (min-width: 1024px) {
+    padding: 32px;
+    gap: 48px;
+  }
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 400px;
+
+  gap: 16px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px
+  }
+
+  @media (min-width: 1024px) {
+    form { gap: 24px }
+    gap: 24px;
+  }
+}
+
+.text {
+  color: var(--yellow-900);
+
+  font-size: 1rem;
+  text-align: center;
+
+  cursor: pointer;
+
+  @media (min-width: 1024px) {
+    font-size: 1.375rem;
+  }
+}
