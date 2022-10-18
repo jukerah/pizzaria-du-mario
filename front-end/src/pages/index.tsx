@@ -1,14 +1,33 @@
+import { FormEvent, useContext, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from '../../styles/home.module.scss';
 
 import logoImg from '../../public/logo-vertical.svg';
 
 import { Input } from '../components/ui/Input';
 import { Button } from '../components/ui/Button';
-import Link from 'next/link';
+
+import { AuthContext } from '../contexts/AuthContext';
 
 export default function Home() {
+  const { signIn } = useContext(AuthContext);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+
+  async function handleLogin(event: FormEvent) {
+    event.preventDefault();
+
+    const data = {
+      email,
+      password
+    };
+
+    await signIn(data);
+  }
+
   return (
     <>
       <Head>
@@ -20,15 +39,19 @@ export default function Home() {
         <div className={styles.login}>
           <h1>Acessar sua conta</h1>
 
-          <form>
+          <form onSubmit={handleLogin}>
             <Input
               type="text"
               placeholder="Digite seu email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
 
             <Input
               type="password"
               placeholder="Digite sua senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <Button
