@@ -1,3 +1,4 @@
+import { useState, FormEvent, useContext } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../../../styles/home.module.scss';
@@ -8,7 +9,33 @@ import { Input } from '../../components/ui/Input';
 import { Button } from '../../components/ui/Button';
 import Link from 'next/link';
 
+import { AuthContext } from '../../contexts/AuthContext';
+
 export default function SignUp() {
+  const { signUp } = useContext(AuthContext);
+
+  const [ name, setName ] = useState('');
+  const [ email, setEmail ] = useState('');
+  const [ password, setPassword ] = useState('');
+  const [ isLoading, setIsLoading ] = useState(false);
+
+  async function handleSinUp(event: FormEvent) {
+    event.preventDefault();
+
+    if (name === '' || email === '' || password === '') {
+      alert('Preencha os campos nome, email e senha!');
+      return;
+    }
+
+    setIsLoading(true);
+
+    const data = { name, email, password };
+
+    await signUp(data);
+
+    setIsLoading(false);
+  }
+
   return (
     <>
       <Head>
@@ -20,25 +47,31 @@ export default function SignUp() {
         <div className={styles.login}>
           <h1>Criando sua conta</h1>
 
-          <form>
+          <form onSubmit={handleSinUp}>
             <Input
               type="text"
               placeholder="Digite seu nome"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
 
             <Input
               type="email"
               placeholder="Digite seu email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
 
             <Input
               type="password"
               placeholder="Digite sua senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <Button
               type="submit"
-              loading={false}
+              loading={isLoading}
             >
               Cadastrar
             </Button>

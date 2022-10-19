@@ -13,12 +13,19 @@ import { AuthContext } from '../contexts/AuthContext';
 
 export default function Home() {
   const { signIn } = useContext(AuthContext);
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
+  const [ email, setEmail ] = useState<string>('');
+  const [ password, setPassword ] = useState<string>('');
+  const [ isLoading, setIsLoading ] = useState<boolean>(false);
 
   async function handleLogin(event: FormEvent) {
     event.preventDefault();
+
+    if (email === '' || password === '') {
+      alert("Por favor, preencha os campos email e senha!");
+      return;
+    }
+
+    setIsLoading(true);
 
     const data = {
       email,
@@ -26,6 +33,8 @@ export default function Home() {
     };
 
     await signIn(data);
+
+    setIsLoading(false);
   }
 
   return (
@@ -56,7 +65,7 @@ export default function Home() {
 
             <Button
               type="submit"
-              loading={false}
+              loading={isLoading}
             >
               Entrar
             </Button>
