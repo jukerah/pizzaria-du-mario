@@ -2,6 +2,7 @@ import { useState, FormEvent, useContext } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../../../styles/home.module.scss';
+import { toast } from 'react-toastify';
 
 import logoImg from '../../../public/logo-vertical.svg';
 
@@ -23,7 +24,7 @@ export default function SignUp() {
     event.preventDefault();
 
     if (name === '' || email === '' || password === '') {
-      alert('Preencha os campos nome, email e senha!');
+      toast.error('reencha os campos nome, email e senha!');
       return;
     }
 

@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../../styles/home.module.scss';
+import { toast } from 'react-toastify';
 
 import logoImg from '../../public/logo-vertical.svg';
 
@@ -21,7 +22,7 @@ export default function Home() {
     event.preventDefault();
 
     if (email === '' || password === '') {
-      alert("Por favor, preencha os campos email e senha!");
+      toast.error('Por favor, preencha os campos email e senha!');
       return;
     }
 
