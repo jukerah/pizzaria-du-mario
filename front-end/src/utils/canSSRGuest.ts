@@ -8,7 +8,9 @@ export function canSSRGuest<P>(fn: GetServerSideProps<P>) {
   return async (ctx: GetServerSidePropsContext): Promise<GetServerSidePropsResult<P>> => {
     const cookies = parseCookies(ctx);
 
-    if (cookies['@nextauth.token']) return {
+    const token = cookies['@nextauth.token'];
+
+    if (token) return {
       redirect: {
         destination: '/dashboard',
         permanent: false
