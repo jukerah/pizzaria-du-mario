@@ -1,4 +1,5 @@
-import { FormEvent, useContext, useState } from 'react';
+import { FormEvent, useState } from 'react';
+import { canSSRAuth } from "../../utils/canSSRAuth";
 import Head from "next/head";
 import styles from './styles.module.scss';
 import { toast } from 'react-toastify';
@@ -67,3 +68,9 @@ export default function Category() {
     </>
   );
 }
+
+export const getServerSideProps = canSSRAuth(async (ctx) => {
+  return {
+    props: {}
+  }
+})
