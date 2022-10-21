@@ -14,7 +14,7 @@ export function Header() {
       <div className={styles.headerContent}>
         <Link href={'/'}>
           <a>
-            <img width="372" height="56" src="/logo-horizontal.svg" alt="Logotipo Pizzaria du'Mario" />
+            <img width="362" height="56" src="/logo-horizontal.svg" alt="Logotipo Pizzaria du'Mario" />
           </a>
         </Link>
 
@@ -31,7 +31,7 @@ export function Header() {
               </Link>
             </li>
             <li>
-              <p><span>Usuário:</span>{user?.name}</p>
+              <p><span>Usuário: </span>{user?.name}</p>
               <button onClick={signOut}>
                 <FiLogOut
                   color="#FFFFFF"

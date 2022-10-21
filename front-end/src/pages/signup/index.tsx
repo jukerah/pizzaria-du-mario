@@ -42,7 +42,7 @@ export default function SignUp() {
   return (
     <>
       <Head>
-        <title>Pizza du&apos;Mario - Faça seu cadastro agora!</title>
+        <title>Pizzaria du&apos;Mario - Faça seu cadastro agora!</title>
       </Head>
       <div className={styles.contrainerCenter}>
         <Image src={logoImg} alt="Logotipo pizzaria du'Mario" />
@@ -75,6 +75,8 @@ export default function SignUp() {
             <Button
               type="submit"
               loading={isLoading}
+              backgroundColor="green-900"
+              color="black"
             >
               Cadastrar
             </Button>

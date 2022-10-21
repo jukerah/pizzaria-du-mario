@@ -43,7 +43,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Pizza du&apos;Mario - Faça seu login</title>
+        <title>Pizzaria du&apos;Mario - Faça seu login</title>
       </Head>
       <div className={styles.contrainerCenter}>
         <Image src={logoImg} alt="Logotipo pizzaria du'Mario" />
@@ -69,6 +69,8 @@ export default function Home() {
             <Button
               type="submit"
               loading={isLoading}
+              backgroundColor="green-900"
+              color="black"
             >
               Entrar
             </Button>
