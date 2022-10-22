@@ -1,18 +1,20 @@
 import { FormEvent, useState } from 'react';
-import { canSSRAuth } from "../../utils/canSSRAuth";
 import Head from "next/head";
+import Router from 'next/router';
 import styles from './styles.module.scss';
 import { toast } from 'react-toastify';
 
 import { Header } from "../../components/ui/Header";
-import { Input } from "../../components/ui/Input";
+import { Input } from "../../components/ui/TextField";
 import { Button } from "../../components/ui/Button";
 import { PageTitle } from '../../components/ui/PageTitle';
 import { setupAPIClient } from '../../services/api';
 
+import { canSSRAuth } from "../../utils/canSSRAuth";
+
 export default function Category() {
-  const [ name, setName ] = useState('');
-  const [ isLoading, setIsLoading ] = useState(false);
+  const [ name, setName ] = useState<string>('');
+  const [ isLoading, setIsLoading ] = useState<boolean>(false);
 
   async function registerCategory(event: FormEvent) {
     event.preventDefault();
@@ -53,15 +55,27 @@ export default function Category() {
               onChange={(e) => setName(e.target.value)}
             />
 
-            <Button
-              type="submit"
-              loading={isLoading}
-              backgroundColor="green-900"
-              color="black"
-              disabled={name === '' ? true : false}
-            >
-              Cadastrar
-            </Button>
+            <div className={styles.containerButton}>
+              <Button
+                type="button"
+                backgroundColor="red-900"
+                color="white"
+                disabled={isLoading}
+                onClick={() => Router.push('/product')}
+              >
+                Cancelar
+              </Button>
+
+              <Button
+                type="submit"
+                loading={isLoading}
+                backgroundColor="green-900"
+                color="black"
+                disabled={(name === '' || isLoading) ? true : false}
+              >
+                Cadastrar
+              </Button>
+            </div>
           </form>
         </main>
       </div>

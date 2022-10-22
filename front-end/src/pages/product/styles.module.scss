@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  width: 100%;
+
+  padding: 0 32px 48px 32px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 800px;
+
+  gap: 24px;
+
+  .containerCategory {
+    display: flex;
+    gap: 24px;
+  
+    button {
+      width: 240px;
+      height: 56px;
+    }
+  
+    select {
+      flex: 1;
+      height: 56px;
+    }
+  }
+  
+  .containerProductAndPrice {
+    display: flex;
+    gap: 24px;
+  
+    input:first-child {
+      flex: 1.5;
+      height: 56px;
+    }
+  
+    input:last-child {
+      flex: 0.5;
+      height: 56px;
+    }
+  }
+  
+  .containerButton {
+    display: flex;
+    gap: 24px
+  }
+}

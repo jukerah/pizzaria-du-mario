@@ -86,7 +86,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       Router.push('/dashboard');
     } catch (error) {
-      toast.error('Erro ao acessar!');
+      toast.error('Usuário ou senha inválido!');
       console.log(error);
     }
   }

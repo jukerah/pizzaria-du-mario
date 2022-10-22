@@ -6,12 +6,11 @@ import { toast } from 'react-toastify';
 
 import logoImg from '../../../public/logo-vertical.svg';
 
-import { Input } from '../../components/ui/Input';
+import { Input } from '../../components/ui/TextField';
 import { Button } from '../../components/ui/Button';
 import Link from 'next/link';
 
 import { AuthContext } from '../../contexts/AuthContext';
-
 import { canSSRGuest } from '../../utils/canSSRGuest';
 
 export default function SignUp() {
@@ -61,6 +60,7 @@ export default function SignUp() {
             <Input
               type="email"
               placeholder="Digite seu email"
+              disabled={name === '' ? true : false}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -68,6 +68,7 @@ export default function SignUp() {
             <Input
               type="password"
               placeholder="Digite sua senha"
+              disabled={email === '' ? true : false}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -77,6 +78,7 @@ export default function SignUp() {
               loading={isLoading}
               backgroundColor="green-900"
               color="black"
+              disabled={name === '' || email === '' || password === '' ? true : isLoading}
             >
               Cadastrar
             </Button>

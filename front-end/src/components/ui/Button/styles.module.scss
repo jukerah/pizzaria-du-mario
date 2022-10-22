@@ -3,7 +3,7 @@
   height: 56px;
 
   border-radius: 4px;
-  border: none;
+  border: none;  
 
   &[disabled] {
     background-color: var(--dark-600) !important;
@@ -13,10 +13,7 @@
     }
 
     cursor: not-allowed;
-
-    svg {
-      animation: rotation 2s infinite;
-    }
+    svg { animation: rotation 2s infinite; }
   }
 
   &:not([disabled]) {

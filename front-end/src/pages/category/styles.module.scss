@@ -12,8 +12,13 @@
     flex-direction: column;
 
     width: 100%;
-    max-width: 524px;
+    max-width: 560px;
 
     gap: 24px;
+
+    .containerButton {
+      display: flex;
+      gap: 24px
+    }
   }
 }

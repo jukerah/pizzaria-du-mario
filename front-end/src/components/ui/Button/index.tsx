@@ -14,17 +14,21 @@ export function Button({ loading, children, backgroundColor, color,  ...rest }: 
   return (
     <button
       className={styles.button}
-      disabled={loading}
       {...rest}
-      style={{ backgroundColor: `var(--${backgroundColor})` }}
+      style={{
+        backgroundColor: `var(--${backgroundColor})`,
+        color: `var(--${color})`,
+      }}
     >
       {loading ? (
-        <FaSpinner color="#000000" size={24} />
+        <FaSpinner color="#FFFFFF" size={24} />
       ) : (
         <a
           className={styles.buttonText}
           style={{ color: `var(--${color})` }}
-        >{children}</a>
+        >
+          {children}
+        </a>
       )}
     </button>
   );

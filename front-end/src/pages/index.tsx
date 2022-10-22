@@ -7,11 +7,10 @@ import { toast } from 'react-toastify';
 
 import logoImg from '../../public/logo-vertical.svg';
 
-import { Input } from '../components/ui/Input';
+import { Input } from '../components/ui/TextField';
 import { Button } from '../components/ui/Button';
 
 import { AuthContext } from '../contexts/AuthContext';
-
 import { canSSRGuest } from '../utils/canSSRGuest';
 
 export default function Home() {
@@ -69,6 +68,7 @@ export default function Home() {
             <Button
               type="submit"
               loading={isLoading}
+              disabled={isLoading}
               backgroundColor="green-900"
               color="black"
             >
