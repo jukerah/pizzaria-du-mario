@@ -4,9 +4,13 @@ import Link from 'next/link';
 
 import { FiLogOut } from 'react-icons/fi';
 
-import { AuthContext } from '../../../contexts/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
-export function Header() {
+interface HeaderProps {
+  page?: string;
+}
+
+export function Header({ page }: HeaderProps) {
   const { user, signOut } = useContext(AuthContext);
 
   return (
@@ -18,16 +22,32 @@ export function Header() {
           </a>
         </Link>
 
-        <nav className={styles.menuNav}>
+        <nav
+          className={styles.menuNav}
+        >
           <ul>
             <li>
-              <Link href={'/category'}>
-                <a>Categoria</a>
+              <Link href={'/'}>
+                <a
+                  // style={{
+                  //   color: page === 'dashboard' && 'var(--yellow-900)',
+                  //   textDecoration: page === 'dashboard' && 'underline'
+                  // }}
+                >
+                  Pedidos
+                </a>
               </Link>
             </li>
             <li>
               <Link href={'/product'}>
-                <a>Cardápio</a>
+                <a
+                  // style={{
+                  //   color: page === 'product' && 'var(--yellow-900)',
+                  //   textDecoration: page === 'product' && 'underline'
+                  // }}
+                >
+                  Novo Produto
+                </a>
               </Link>
             </li>
             <li>

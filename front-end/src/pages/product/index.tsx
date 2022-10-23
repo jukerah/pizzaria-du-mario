@@ -1,10 +1,11 @@
 import { FormEvent, useState, ChangeEvent } from 'react';
 import Router from 'next/router';
 import Head from "next/head";
+import Modal from 'react-modal';
 import { toast } from 'react-toastify';
 import styles from './styles.module.scss';
 
-import { Header } from "../../components/ui/Header";
+import { Header } from "../../components/Header";
 import { PageTitle } from "../../components/ui/PageTitle";
 
 import { canSSRAuth } from "../../utils/canSSRAuth";
@@ -12,6 +13,7 @@ import { Input, Select, TextArea } from "../../components/ui/TextField";
 import { Button } from "../../components/ui/Button";
 
 import { setupAPIClient } from '../../services/api';
+import { ModalRegisterCategory } from '../../components/Modal/RegisterCategory';
 
 type CategoryProps = {
   id: string;
@@ -25,6 +27,7 @@ interface ProductProps {
 export default function Product({ categoryList }: ProductProps) {
   const [ categories, setCategories ] = useState<CategoryProps[]>(categoryList || []);
   const [ categorySelected, setCategorySelected ] = useState<number>(0);
+  const [ modalIsOpen, setModalIsOpen ] = useState<boolean>(false);
 
   const [ filePreview, setFilePreview ] = useState<string>('');
   const [ file, setFile ] = useState<File>(null);
@@ -35,6 +38,23 @@ export default function Product({ categoryList }: ProductProps) {
 
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
 
+  function handleCloseModal() {
+    setModalIsOpen(false);
+    refreshCategoryList();
+  }
+
+  function handleOpenModalView() {
+    setModalIsOpen(true);
+  }
+
+  async function refreshCategoryList() {
+    const apiClient = setupAPIClient();
+
+    const categoryList = await apiClient.get('/category');
+
+    setCategories(categoryList.data);
+  }
+  
   async function registerProduct(event: FormEvent) {
     event.preventDefault();
 
@@ -94,13 +114,15 @@ export default function Product({ categoryList }: ProductProps) {
     }
   }
 
+  Modal.setAppElement('#__next');
+
   return (
     <>
       <Head>
         <title>Novo produto - Pizzaria du&apos;Mario</title>
       </Head>
       <div>
-        <Header />
+        <Header page="product" />
 
         <main className={styles.container}>
           <PageTitle>Novo produto</PageTitle>
@@ -123,7 +145,7 @@ export default function Product({ categoryList }: ProductProps) {
                 loading={false}
                 backgroundColor="green-900"
                 color="black"
-                onClick={() => Router.push('/category')}
+                onClick={() => handleOpenModalView()}
               >
                 Nova Categoria
               </Button>
@@ -188,6 +210,12 @@ export default function Product({ categoryList }: ProductProps) {
             </div>
           </form>
         </main>
+        {modalIsOpen && (
+          <ModalRegisterCategory
+            isOpen={modalIsOpen}
+            onRequestClose={handleCloseModal}
+          />
+        )}
       </div>
     </>
   );

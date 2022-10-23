@@ -36,19 +36,21 @@
         margin-right: 8px;
       }
 
-      a { font-size: 1.625rem; }
+      a {
+        font-size: 1.625rem;
+        text-underline-offset: 8px;
+      }
 
       a:hover {
         color: var(--yellow-900);
 
         text-decoration: underline;
-        text-underline-offset: 8px;
       }
 
       a, button { transition: .3s ease; }
 
       button {
-        background-color: rgba(0, 0, 0, 0);
+        background: transparent;
         padding: 16px;
       }
 
