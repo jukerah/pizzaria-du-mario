@@ -1,24 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
   View,
-  Text,
   Image,
-  TouchableOpacity
 } from 'react-native';
-import Button from '../../component/ui/Button';
+
+import { AuthContext } from '../../contexts/AuthContext';
 
 import Input from '../../component/ui/TextField';
+import Button from '../../component/ui/Button';
 
 export default function SignIn() {
+  const { signIn } = useContext(AuthContext);
   const [ email, setEmail ] = useState<string>('');
   const [ password, setPassword ] = useState<string>('');
 
-  function handleLogin() {
+  async function handleLogin() {
     if (email === '' || password === '') {
       return;
     }
-    console.log(email, password);
+
+    await signIn({ email, password });
   }
 
   return (
@@ -27,13 +29,15 @@ export default function SignIn() {
         source={require('../../assets/logo.png')}
         style={styles.logo}
       />
+
       <View style={styles.containerInput}>
         <Input
           placeholder="Digite seu email"
           accessibilityLabel="Digite seu email"
           value={email}
-          onChangeText={setEmail}
+          onChangeText={(text: string) => setEmail(text.toLowerCase())}
         />
+
         <Input
           placeholder="Digite sua senha"
           accessibilityLabel="Digite sua senha"
@@ -41,6 +45,7 @@ export default function SignIn() {
           value={password}
           onChangeText={setPassword}
         />
+
         <Button
           text="Acessar"
           backgroundColor="#45FFB1"
