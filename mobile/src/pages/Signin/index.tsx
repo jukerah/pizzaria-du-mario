@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
   Text,
   Image,
-  TextInput,
   TouchableOpacity
 } from 'react-native';
+import Button from '../../component/ui/Button';
+
+import Input from '../../component/ui/TextField';
 
 export default function SignIn() {
+  const [ email, setEmail ] = useState<string>('');
+  const [ password, setPassword ] = useState<string>('');
+
+  function handleLogin() {
+    if (email === '' || password === '') {
+      return;
+    }
+    console.log(email, password);
+  }
+
   return (
     <View style={styles.container}>
       <Image
@@ -16,25 +28,26 @@ export default function SignIn() {
         style={styles.logo}
       />
       <View style={styles.containerInput}>
-        <TextInput
+        <Input
           placeholder="Digite seu email"
           accessibilityLabel="Digite seu email"
-          style={styles.input}
+          value={email}
+          onChangeText={setEmail}
         />
-        <TextInput
+        <Input
           placeholder="Digite sua senha"
           accessibilityLabel="Digite sua senha"
           secureTextEntry={true}
-          style={styles.input}
+          value={password}
+          onChangeText={setPassword}
         />
-        <TouchableOpacity
+        <Button
+          text="Acessar"
+          backgroundColor="#45FFB1"
+          color="#000000"
           accessibilityLabel="Botão para acessar sua conta"
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>
-            Acessar
-          </Text>
-        </TouchableOpacity>
+          onPress={handleLogin}
+        />
       </View>
     </View>
   );
@@ -49,41 +62,13 @@ const styles = StyleSheet.create({
     padding: 24
   },
   logo: {
-   width: 300,
-   height: 45,
-   marginBottom: 40
+    width: 300,
+    height: 45,
+    marginBottom: 24
   },
   containerInput: {
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  input: {
-    backgroundColor: '#FFFFFF',
-    color: '#000000',
-    fontSize: 16,
-    width: '100%',
-    height: 56,
-
-    paddingHorizontal: 16,
-    marginTop: 16,
-    borderRadius: 6
-  },
-  text: {
-    color: '#FFFFFF'
-  },
-  button: {
-    backgroundColor: '#45FFB1',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: 48,
-     marginTop: 16,
-     borderRadius: 6
-  },
-  buttonText: {
-    color: '#000000',
-    fontSize: 20,
-    fontWeight: 'bold'
   }
 });
