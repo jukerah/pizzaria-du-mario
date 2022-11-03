@@ -6,7 +6,7 @@ interface ButtonProps {
   backgroundColor: string;
   color: string;
   accessibilityLabel: string;
-  onPress?: () => void;
+  onPress?: () => Promise<void>;
 }
 
 export default function Button({ text, backgroundColor, color, accessibilityLabel, onPress }:ButtonProps) {
@@ -20,7 +20,6 @@ export default function Button({ text, backgroundColor, color, accessibilityLabe
       onPress={onPress}
       accessibilityLabel={accessibilityLabel}
       style={[styles.button, stylesProps.backgroundColor]}
-      onPress={onPress}
     >
       <Text style={[styles.buttonText, stylesProps.color]}>
         {text}

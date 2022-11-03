@@ -2,16 +2,17 @@ import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
   View,
-  Image,
+  Image
 } from 'react-native';
 
 import { AuthContext } from '../../contexts/AuthContext';
 
 import Input from '../../component/ui/TextField';
 import Button from '../../component/ui/Button';
+import Loading from '../../component/Loading';
 
 export default function SignIn() {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, loadingAuth } = useContext(AuthContext);
   const [ email, setEmail ] = useState<string>('');
   const [ password, setPassword ] = useState<string>('');
 
@@ -24,37 +25,43 @@ export default function SignIn() {
   }
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={require('../../assets/logo.png')}
-        style={styles.logo}
-      />
-
-      <View style={styles.containerInput}>
-        <Input
-          placeholder="Digite seu email"
-          accessibilityLabel="Digite seu email"
-          value={email}
-          onChangeText={(text: string) => setEmail(text.toLowerCase())}
+    <>
+      <View style={styles.container}>
+        <Image
+          source={require('../../assets/logo.png')}
+          style={styles.logo}
         />
 
-        <Input
-          placeholder="Digite sua senha"
-          accessibilityLabel="Digite sua senha"
-          secureTextEntry={true}
-          value={password}
-          onChangeText={setPassword}
-        />
+        <View style={styles.containerInput}>
+          <Input
+            placeholder="Digite seu email"
+            accessibilityLabel="Digite seu email"
+            value={email}
+            onChangeText={(text: string) => setEmail(text.toLowerCase())}
+          />
 
-        <Button
-          text="Acessar"
-          backgroundColor="#45FFB1"
-          color="#000000"
-          accessibilityLabel="Botão para acessar sua conta"
-          onPress={handleLogin}
-        />
+          <Input
+            placeholder="Digite sua senha"
+            accessibilityLabel="Digite sua senha"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={setPassword}
+          />
+
+          <Button
+            text="Acessar"
+            backgroundColor="#45FFB1"
+            color="#000000"
+            accessibilityLabel="Botão para acessar sua conta"
+            onPress={handleLogin}
+          />
+        </View>
       </View>
-    </View>
+
+      {loadingAuth &&
+        <Loading />
+      }
+    </>
   );
 }
 
